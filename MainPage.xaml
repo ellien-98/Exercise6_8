@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Exercise6_8_NET8.MainPage"
+             xmlns:local="clr-namespace:Exercise6_8_NET8.ViewModels"
+             >
+
+<ContentPage.BindingContext>
+        <local:OptionsViewModel />
+</ContentPage.BindingContext>
+
+    <StackLayout Padding="10">
+        <Label Text="Please select your favourite option" FontSize="20" HorizontalOptions="Center"></Label>
+
+        <CollectionView ItemsSource="{Binding MenuOptions}" SelectionMode="Single" SelectionChanged="OnSelectionChanged">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Padding="7" Margin="3" BackgroundColor="Purple">
+                        <Label Text="Binding Name" FontSize="15"/>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button Text="Cancel Order" Command="{Binding CancelOrderCmd}" 
+                IsVisible="{Binding BeingPrepared, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+        <Label Text="{Binding Message}" FontSize="16" HorizontalOptions="Center"/>
+
+    </StackLayout>
+
+</ContentPage>
